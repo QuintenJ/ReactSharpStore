@@ -27,7 +27,7 @@ namespace API.Data
                     Name = "Xbox Series S",
                     Description = "Next-gen performance in the smallest Xbox ever. Go all digital with Xbox Series S and enjoy next-gen gaming at a great price",
                     Price = 300,
-                    PictureUrl = "/images/products/console-xboxs.png",
+                    PictureUrl = "/images/products/console-xboxss.png",
                     Brand = "Xbox",
                     Type = "Console",
                     QuantityInStock = 100
@@ -87,7 +87,7 @@ namespace API.Data
                     Name = "PlayStation 5 Wireless Controller",
                     Description = "The DualSense wireless controller for PS5 offers immersive haptic feedback2, dynamic adaptive triggers and a built-in microphone, all integrated into an iconic design.",
                     Price = 70,
-                    PictureUrl = "/images/products/conrtoller-ps5.jpg",
+                    PictureUrl = "/images/products/controller-ps5.jpg",
                     Brand = "Sony",
                     Type = "Controller",
                     QuantityInStock = 100
@@ -118,7 +118,7 @@ namespace API.Data
                     Name = "Google Pixel 6 Pro 256GB",
                     Description = "Introducing Pixel 6 Pro, the completely redesigned, fully loaded Google 5G phone.* With a powerful camera system, next-gen security, and the custom-built Google Tensor processor, it's the smartest and fastest Pixel yet.",
                     Price = 849,
-                    PictureUrl = "/images/products/gphone-pixel6pro.png",
+                    PictureUrl = "/images/products/phone-pixel6pro.png",
                     Brand = "Google",
                     Type = "Phones",
                     QuantityInStock = 100
