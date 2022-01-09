@@ -1,4 +1,6 @@
+import { Typography } from "@mui/material";
 import { useEffect, useState } from "react";
+import Catalog from "../../features/catalog/Catalog";
 import { Product } from "../models/product";
 
 function App() {
@@ -18,19 +20,15 @@ function App() {
       price: (prevState.length * 100 + 100),
       brand: 'Brand Test',
       description: 'Description Test',
-      pictureUrl: 'https://via.placeholder.com/150',
+      pictureUrl: 'https://picsum.photos/200',
     }]);
   }
+
   return (
-    <div>
-      <h1>ReactSharpStore</h1>
-      <ul>
-        {products.map(product => (
-          <li key={product.id}>{product.name} - {product.price}</li>
-        ))}
-      </ul>
-      <button onClick={addProduct}>Add Product</button>
-    </div>
+    <>
+      <Typography variant="h1">ReactSharpStore</Typography>
+      <Catalog products={products} addProduct={addProduct} />
+    </>
   );
 }
 
