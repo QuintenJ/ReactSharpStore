@@ -11,6 +11,15 @@ axios.interceptors.response.use(response => {
     const { data, status } = error.response!;
     switch (status) {
         case 400:
+            if (data.errors) {
+                const modelStateErrors: string[] = [];
+                for (const key in data.errors) {
+                    if (data.errors[key]) {
+                        modelStateErrors.push(data.errors[key])
+                    }
+                }
+                throw modelStateErrors.flat();
+            }
             toast.error(data.title);
             break;
         case 401:
@@ -37,7 +46,7 @@ const Catalog = {
     details: (id: number) => requests.get(`products/${id}`)
 }
 
-const testErrors = {
+const TestErrors = {
     get400Error: () => requests.get('errortest/bad-request'),
     get401Error: () => requests.get('errortest/unauthorized'),
     get404Error: () => requests.get('errortest/not-found'),
@@ -46,7 +55,7 @@ const testErrors = {
 }
 const agent = {
     Catalog,
-    testErrors
+    TestErrors
 }
 
 export default agent;
