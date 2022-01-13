@@ -2,6 +2,7 @@ import { ShoppingCart } from "@mui/icons-material";
 import { AppBar, Badge, IconButton, List, ListItem, Switch, Toolbar, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import { NavLink } from "react-router-dom";
+import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
 
 interface Props {
     darkMode: boolean;
@@ -44,6 +45,7 @@ export default function Header({ darkMode, handleThemeChange }: Props) {
                         ReactSharpStore
                     </Typography>
                     <Switch checked={darkMode} onChange={handleThemeChange} />
+                    <DarkModeOutlinedIcon />
                 </Box>
 
 
@@ -61,7 +63,7 @@ export default function Header({ darkMode, handleThemeChange }: Props) {
                 </List>
                 <Box display="flex" alignItems="center">
                     <IconButton size="large" sx={{ color: "inherit" }}>
-                        <Badge badgeContent={4} color="secondary">
+                        <Badge badgeContent={4} color="error">
                             <ShoppingCart />
                         </Badge>
                     </IconButton>
