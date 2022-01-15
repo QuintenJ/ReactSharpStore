@@ -43,7 +43,7 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> AddItemToCart(int productId, int quantity)
+        public async Task<ActionResult<CartDto>> AddItemToCart(int productId, int quantity)
         {
             var cart = await RetrieveCart();
             if (cart == null) cart = CreateCart();
