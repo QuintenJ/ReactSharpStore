@@ -5,7 +5,7 @@ import { history } from "../..";
 const sleep = () => new Promise(resolve => setTimeout(resolve, 500));
 
 axios.defaults.baseURL = 'http://localhost:5000/api/';
-
+axios.defaults.withCredentials = true;
 const responseBody = (response: AxiosResponse) => response.data;
 
 axios.interceptors.response.use(async response => {
@@ -60,9 +60,16 @@ const TestErrors = {
     get500Error: () => requests.get('errortest/server-error'),
     getValidationError: () => requests.get('errortest/validation-error'),
 }
+
+const Cart = {
+    get: () => requests.get("cart"),
+    addItem: (productId: number, quantity = 1) => requests.post(`cart?productId=${productId}&quantity=${quantity}`, {}),
+    removeItem: (productId: number, quantity = 1) => requests.delete(`cart?productId=${productId}&quantity=${quantity}`),
+}
 const agent = {
     Catalog,
-    TestErrors
+    TestErrors,
+    Cart
 }
 
 export default agent;
