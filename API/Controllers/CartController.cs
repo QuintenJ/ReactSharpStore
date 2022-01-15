@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using API.Data;
+using API.DTOs;
 using API.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -18,13 +19,27 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<Cart>> GetCart()
+        public async Task<ActionResult<CartDto>> GetCart()
         {
             var cart = await RetrieveCart();
 
             if (cart == null) return NotFound();
 
-            return cart;
+            return new CartDto
+            {
+                Id = cart.Id,
+                BuyerId = cart.BuyerId,
+                Items = cart.Items.Select(item => new CartItemDto
+                {
+                    ProductId = item.ProductId,
+                    Name = item.Product.Name,
+                    Price = item.Product.Price,
+                    PictureUrl = item.Product.PictureUrl,
+                    Type = item.Product.Type,
+                    Brand = item.Product.Brand,
+                    Quantity = item.Quantity
+                }).ToList()
+            };
         }
 
         [HttpPost]
@@ -48,10 +63,16 @@ namespace API.Controllers
         [HttpDelete]
         public async Task<ActionResult> RemoveCartItem(int productId, int quantity)
         {
-            // Get the cart
-            // remove or reduce the quantity of the item
-            // save changes
-            return Ok();
+            var cart = await RetrieveCart();
+            if (cart == null) return NotFound();
+            cart.RemoveItem(productId, quantity);
+
+            var result = await _context.SaveChangesAsync() > 0;
+
+            if (result)
+                return Ok();
+
+            return BadRequest(new ProblemDetails { Title = "Problem Removing Item From Cart" });
         }
 
         private async Task<Cart> RetrieveCart()
