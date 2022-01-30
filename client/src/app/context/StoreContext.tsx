@@ -3,7 +3,7 @@ import { Cart } from "../models/cart";
 
 interface StoreContextValue {
     cart: Cart | null;
-    setCart: (cart: Cart | null) => void;
+    setCart: (cart: Cart) => void;
     removeItem: (productId: number, quantity: number) => void;
 }
 
